@@ -34,3 +34,9 @@ data = [
     ("R2", "15.2(2)T1", "Cisco 2911"),
     ("SW1", "12.2(55)SE9", "Cisco WS-C2960-8TC-L"),
 ]
+
+def convert_to_dict(fields,values):
+  return [dict(zip(fields, vals)) for vals in values]
+
+
+print(convert_to_dict(headers,data))
