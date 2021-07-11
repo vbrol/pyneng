@@ -27,11 +27,9 @@ import re
 
 def get_ip_from_cfg(filename):
     result=[]
+    regex=r"ip address (\S+) (\S+)"
     with open(filename) as f:
-      for line in f:
-        match=re.search(r'ip address (\S+) (\S+)',line)
-        if match:
-          result.append(match.groups())
+          result = [ m.groups() for m in re.finditer(regex,f.read()) ]
 
     return result
 
