@@ -24,3 +24,23 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 """
+
+def parse_sh_cdp_neighbors(cdpne):
+    hostname=re.search("^(\S+)['#'|'>']",cdpne).group(1)
+    regex=r"(?<rr>\S+) +(?P<iface>\S+ \S+) +\d+.* (?P<riface>\S+ \S+)\n"
+
+
+
+
+
+
+
+
+aaa="""
+R4>show cdp neighbors
+
+Device ID    Local Intrfce   Holdtme     Capability       Platform    Port ID
+R5           Fa 0/1          122           R S I           2811       Fa 0/1
+R6           Fa 0/2          143           R S I           2811       Fa 0/0
+
+"""

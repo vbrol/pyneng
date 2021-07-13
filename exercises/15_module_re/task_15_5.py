@@ -30,6 +30,7 @@ description Connected to SW1 port Eth 0/1
 import re
 
 def generate_description_from_cdp(filename):
+    result = {}
     regex=r"(?P<name>\S+) +(?P<iface>\S+ \S+) +\d+.* +(?P<iface2>\S+ \S+)\n"
     desc = 'description Connected to {} port {}'
 #    regex=r"(?P<name>\S+)"
