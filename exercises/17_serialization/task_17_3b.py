@@ -43,3 +43,18 @@
 > pip install graphviz
 
 """
+import yaml
+from draw_network_graph import draw_topology
+
+def transform_topology(yamlf):
+    result={}
+    with open(yamlf) as f:
+        topol = yaml.safe_load(f)
+    for hostname,ifaces in topol.items():
+        for liface,other in ifaces.items():
+            rhost,riface=list(other.items())[0]
+            if not (rhost,riface) in result:
+                result[(hostname,liface)]=(rhost,riface)
+    return result
+
+draw_topology(transform_topology('top.txt'))

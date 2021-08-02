@@ -27,24 +27,24 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 import re
 
 def parse_sh_cdp_neighbors(cdpne):
-    hostname=re.search("^(\S+)['#'|'>']",cdpne).group(1)
-    regex=r"(?<rr>\S+) +(?P<iface>\S+ \S+) +\d+.* (?P<riface>\S+ \S+)\n"
-    match = re.finditer(regexp,cdpne)
+    result = {}
+    hostname=re.search("(\S+)['#'|'>']",cdpne).group(1)
+    result[hostname]={}
+    regex=r"(?P<rr>\S+) +(?P<iface>\S+ \S+) +\d+.* (?P<riface>\S+ \S+)\n"
+    match = re.finditer(regex,cdpne)
     for m in match:
+       rr, iface, riface = m.group("rr","iface","riface")
+       result[hostname][iface] = { rr:riface}
+    return result
 
 
 
-
-
-
-
-
-
-aaa="""
-R4>show cdp neighbors
+aaa="""R4>show cdp neighbors
 
 Device ID    Local Intrfce   Holdtme     Capability       Platform    Port ID
 R5           Fa 0/1          122           R S I           2811       Fa 0/1
 R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 """
+
+print(parse_sh_cdp_neighbors(aaa))
